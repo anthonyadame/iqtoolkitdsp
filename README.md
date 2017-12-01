@@ -14,6 +14,7 @@ OData SDK
 http://www.odata.org/developers/odata-sdk
 
 IQToolkit by mattwar
+https://github.com/mattwar/iqtoolkit
 http://www.codeplex.com/IQToolkit
 http://blogs.msdn.com/mattwar/pages/linq-links.aspx
 
