@@ -1,0 +1,411 @@
+﻿<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <edmx:DataServices xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="1.0">
+    <Schema Namespace="IQTWcf" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://schemas.microsoft.com/ado/2007/05/edm">
+      <EntityType Name="Category">
+        <Key>
+          <PropertyRef Name="CategoryID" />
+        </Key>
+        <Property Name="CategoryID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="CategoryName" Type="Edm.String" Nullable="true" />
+        <Property Name="Description" Type="Edm.String" Nullable="true" />
+        <Property Name="Picture" Type="Edm.Binary" Nullable="true" />
+        <NavigationProperty Name="Products" Relationship="IQTWcf.Category_Products" FromRole="Category" ToRole="Products" />
+      </EntityType>
+      <EntityType Name="CustomerCustomerDemo">
+        <Key>
+          <PropertyRef Name="CustomerID" />
+          <PropertyRef Name="CustomerTypeID" />
+        </Key>
+        <Property Name="CustomerID" Type="Edm.String" Nullable="false" />
+        <Property Name="CustomerTypeID" Type="Edm.String" Nullable="false" />
+        <NavigationProperty Name="Customer" Relationship="IQTWcf.CustomerCustomerDemo_Customer" FromRole="CustomerCustomerDemo" ToRole="Customer" />
+        <NavigationProperty Name="CustomerDemographics" Relationship="IQTWcf.CustomerCustomerDemo_CustomerDemographics" FromRole="CustomerCustomerDemo" ToRole="CustomerDemographics" />
+      </EntityType>
+      <EntityType Name="CustomerDemographic">
+        <Key>
+          <PropertyRef Name="CustomerTypeID" />
+        </Key>
+        <Property Name="CustomerDesc" Type="Edm.String" Nullable="true" />
+        <Property Name="CustomerTypeID" Type="Edm.String" Nullable="false" />
+        <NavigationProperty Name="CustomerCustomerDemos" Relationship="IQTWcf.CustomerDemographic_CustomerCustomerDemos" FromRole="CustomerDemographic" ToRole="CustomerCustomerDemos" />
+      </EntityType>
+      <EntityType Name="Customer">
+        <Key>
+          <PropertyRef Name="CustomerID" />
+        </Key>
+        <Property Name="Address" Type="Edm.String" Nullable="true" />
+        <Property Name="City" Type="Edm.String" Nullable="true" />
+        <Property Name="CompanyName" Type="Edm.String" Nullable="true" />
+        <Property Name="ContactName" Type="Edm.String" Nullable="true" />
+        <Property Name="ContactTitle" Type="Edm.String" Nullable="true" />
+        <Property Name="Country" Type="Edm.String" Nullable="true" />
+        <Property Name="CustomerID" Type="Edm.String" Nullable="false" />
+        <Property Name="Fax" Type="Edm.String" Nullable="true" />
+        <Property Name="Phone" Type="Edm.String" Nullable="true" />
+        <Property Name="PostalCode" Type="Edm.String" Nullable="true" />
+        <Property Name="Region" Type="Edm.String" Nullable="true" />
+        <NavigationProperty Name="CustomerCustomerDemos" Relationship="IQTWcf.Customer_CustomerCustomerDemos" FromRole="Customer" ToRole="CustomerCustomerDemos" />
+        <NavigationProperty Name="Orders" Relationship="IQTWcf.Customer_Orders" FromRole="Customer" ToRole="Orders" />
+      </EntityType>
+      <EntityType Name="Employee">
+        <Key>
+          <PropertyRef Name="EmployeeID" />
+        </Key>
+        <Property Name="Address" Type="Edm.String" Nullable="true" />
+        <Property Name="BirthDate" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="City" Type="Edm.String" Nullable="true" />
+        <Property Name="Country" Type="Edm.String" Nullable="true" />
+        <Property Name="EmployeeID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Extension" Type="Edm.String" Nullable="true" />
+        <Property Name="FirstName" Type="Edm.String" Nullable="true" />
+        <Property Name="HireDate" Type="Edm.DateTime" Nullable="true" />
+        <Property Name="HomePhone" Type="Edm.String" Nullable="true" />
+        <Property Name="LastName" Type="Edm.String" Nullable="true" />
+        <Property Name="Notes" Type="Edm.String" Nullable="true" />
+        <Property Name="Photo" Type="Edm.Binary" Nullable="true" />
+        <Property Name="PhotoPath" Type="Edm.String" Nullable="true" />
+        <Property Name="PostalCode" Type="Edm.String" Nullable="true" />
+        <Property Name="Region" Type="Edm.String" Nullable="true" />
+        <Property Name="ReportsTo" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Title" Type="Edm.String" Nullable="true" />
+        <Property Name="TitleOfCourtesy" Type="Edm.String" Nullable="true" />
+        <NavigationProperty Name="ReportsToEmployee" Relationship="IQTWcf.Employee_ReportsToEmployee" FromRole="Employee" ToRole="ReportsToEmployee" />
+        <NavigationProperty Name="EmployeeTerritories" Relationship="IQTWcf.Employee_EmployeeTerritories" FromRole="Employee" ToRole="EmployeeTerritories" />
+        <NavigationProperty Name="Orders" Relationship="IQTWcf.Employee_Orders" FromRole="Employee" ToRole="Orders" />
+        <NavigationProperty Name="ReportsToChildren" Relationship="IQTWcf.Employee_ReportsToChildren" FromRole="Employee" ToRole="ReportsToChildren" />
+      </EntityType>
+      <EntityType Name="EmployeeTerritory">
+        <Key>
+          <PropertyRef Name="EmployeeID" />
+          <PropertyRef Name="TerritoryID" />
+        </Key>
+        <Property Name="EmployeeID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="TerritoryID" Type="Edm.String" Nullable="false" />
+        <NavigationProperty Name="Employee" Relationship="IQTWcf.EmployeeTerritory_Employee" FromRole="EmployeeTerritory" ToRole="Employee" />
+        <NavigationProperty Name="Territory" Relationship="IQTWcf.EmployeeTerritory_Territory" FromRole="EmployeeTerritory" ToRole="Territory" />
+      </EntityType>
+      <EntityType Name="OrderDetail">
+        <Key>
+          <PropertyRef Name="OrderID" />
+          <PropertyRef Name="ProductID" />
+        </Key>
+        <Property Name="Discount" Type="Edm.Single" Nullable="false" />
+        <Property Name="OrderID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="ProductID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Quantity" Type="Edm.Int32" Nullable="false" />
+        <Property Name="UnitPrice" Type="Edm.Decimal" Nullable="false" />
+        <NavigationProperty Name="Order" Relationship="IQTWcf.OrderDetail_Order" FromRole="OrderDetail" ToRole="Order" />
+        <NavigationProperty Name="Product" Relationship="IQTWcf.OrderDetail_Product" FromRole="OrderDetail" ToRole="Product" />
+      </EntityType>
+      <EntityType Name="Order">
+        <Key>
+          <PropertyRef Name="OrderID" />
+        </Key>
+        <Property Name="CustomerID" Type="Edm.String" Nullable="true" />
+        <Property Name="EmployeeID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Freight" Type="Edm.Decimal" Nullable="false" />
+        <Property Name="OrderDate" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="OrderID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="RequiredDate" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="ShipAddress" Type="Edm.String" Nullable="true" />
+        <Property Name="ShipCity" Type="Edm.String" Nullable="true" />
+        <Property Name="ShipCountry" Type="Edm.String" Nullable="true" />
+        <Property Name="ShipName" Type="Edm.String" Nullable="true" />
+        <Property Name="ShippedDate" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="ShipPostalCode" Type="Edm.String" Nullable="true" />
+        <Property Name="ShipRegion" Type="Edm.String" Nullable="true" />
+        <Property Name="ShipVia" Type="Edm.Int32" Nullable="false" />
+        <NavigationProperty Name="Customer" Relationship="IQTWcf.Order_Customer" FromRole="Order" ToRole="Customer" />
+        <NavigationProperty Name="Employee" Relationship="IQTWcf.Order_Employee" FromRole="Order" ToRole="Employee" />
+        <NavigationProperty Name="OrderDetails" Relationship="IQTWcf.Order_OrderDetails" FromRole="Order" ToRole="OrderDetails" />
+        <NavigationProperty Name="ShipViaShipper" Relationship="IQTWcf.Order_ShipViaShipper" FromRole="Order" ToRole="ShipViaShipper" />
+      </EntityType>
+      <EntityType Name="Product">
+        <Key>
+          <PropertyRef Name="ProductID" />
+        </Key>
+        <Property Name="ProductID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="ProductName" Type="Edm.String" Nullable="true" />
+        <Property Name="SupplierID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="CategoryID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="QuantityPerUnit" Type="Edm.String" Nullable="true" />
+        <Property Name="UnitPrice" Type="Edm.Decimal" Nullable="false" />
+        <Property Name="UnitsInStock" Type="Edm.Int32" Nullable="false" />
+        <Property Name="UnitsOnOrder" Type="Edm.Int32" Nullable="false" />
+        <Property Name="ReorderLevel" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Discontinued" Type="Edm.Boolean" Nullable="false" />
+        <NavigationProperty Name="Category" Relationship="IQTWcf.Product_Category" FromRole="Product" ToRole="Category" />
+        <NavigationProperty Name="Supplier" Relationship="IQTWcf.Product_Supplier" FromRole="Product" ToRole="Supplier" />
+        <NavigationProperty Name="OrderDetails" Relationship="IQTWcf.Product_OrderDetails" FromRole="Product" ToRole="OrderDetails" />
+      </EntityType>
+      <EntityType Name="Region">
+        <Key>
+          <PropertyRef Name="RegionID" />
+        </Key>
+        <Property Name="RegionDescription" Type="Edm.String" Nullable="true" />
+        <Property Name="RegionID" Type="Edm.Int32" Nullable="false" />
+        <NavigationProperty Name="Territories" Relationship="IQTWcf.Region_Territories" FromRole="Region" ToRole="Territories" />
+      </EntityType>
+      <EntityType Name="Shipper">
+        <Key>
+          <PropertyRef Name="ShipperID" />
+        </Key>
+        <Property Name="CompanyName" Type="Edm.String" Nullable="true" />
+        <Property Name="Phone" Type="Edm.String" Nullable="true" />
+        <Property Name="ShipperID" Type="Edm.Int32" Nullable="false" />
+        <NavigationProperty Name="ShipViaOrders" Relationship="IQTWcf.Shipper_ShipViaOrders" FromRole="Shipper" ToRole="ShipViaOrders" />
+      </EntityType>
+      <EntityType Name="Supplier">
+        <Key>
+          <PropertyRef Name="SupplierID" />
+        </Key>
+        <Property Name="SupplierID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="CompanyName" Type="Edm.String" Nullable="true" />
+        <Property Name="ContactName" Type="Edm.String" Nullable="true" />
+        <Property Name="ContactTitle" Type="Edm.String" Nullable="true" />
+        <Property Name="Address" Type="Edm.String" Nullable="true" />
+        <Property Name="City" Type="Edm.String" Nullable="true" />
+        <Property Name="Region" Type="Edm.String" Nullable="true" />
+        <Property Name="PostalCode" Type="Edm.String" Nullable="true" />
+        <Property Name="Country" Type="Edm.String" Nullable="true" />
+        <Property Name="Phone" Type="Edm.String" Nullable="true" />
+        <Property Name="Fax" Type="Edm.String" Nullable="true" />
+        <Property Name="HomePage" Type="Edm.String" Nullable="true" />
+        <NavigationProperty Name="Products" Relationship="IQTWcf.Supplier_Products" FromRole="Supplier" ToRole="Products" />
+      </EntityType>
+      <EntityType Name="Territory">
+        <Key>
+          <PropertyRef Name="TerritoryID" />
+        </Key>
+        <Property Name="RegionID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="TerritoryDescription" Type="Edm.String" Nullable="true" />
+        <Property Name="TerritoryID" Type="Edm.String" Nullable="false" />
+        <NavigationProperty Name="Region" Relationship="IQTWcf.Territory_Region" FromRole="Territory" ToRole="Region" />
+        <NavigationProperty Name="EmployeeTerritories" Relationship="IQTWcf.Territory_EmployeeTerritories" FromRole="Territory" ToRole="EmployeeTerritories" />
+      </EntityType>
+      <Association Name="Category_Products">
+        <End Role="Category" Type="IQTWcf.Category" Multiplicity="*" />
+        <End Role="Products" Type="IQTWcf.Product" Multiplicity="*" />
+      </Association>
+      <Association Name="CustomerCustomerDemo_Customer">
+        <End Role="CustomerCustomerDemo" Type="IQTWcf.CustomerCustomerDemo" Multiplicity="*" />
+        <End Role="Customer" Type="IQTWcf.Customer" Multiplicity="0..1" />
+      </Association>
+      <Association Name="CustomerCustomerDemo_CustomerDemographics">
+        <End Role="CustomerCustomerDemo" Type="IQTWcf.CustomerCustomerDemo" Multiplicity="*" />
+        <End Role="CustomerDemographics" Type="IQTWcf.CustomerDemographic" Multiplicity="*" />
+      </Association>
+      <Association Name="CustomerDemographic_CustomerCustomerDemos">
+        <End Role="CustomerDemographic" Type="IQTWcf.CustomerDemographic" Multiplicity="*" />
+        <End Role="CustomerCustomerDemos" Type="IQTWcf.CustomerCustomerDemo" Multiplicity="*" />
+      </Association>
+      <Association Name="Customer_CustomerCustomerDemos">
+        <End Role="Customer" Type="IQTWcf.Customer" Multiplicity="*" />
+        <End Role="CustomerCustomerDemos" Type="IQTWcf.CustomerCustomerDemo" Multiplicity="*" />
+      </Association>
+      <Association Name="Customer_Orders">
+        <End Role="Customer" Type="IQTWcf.Customer" Multiplicity="*" />
+        <End Role="Orders" Type="IQTWcf.Order" Multiplicity="*" />
+      </Association>
+      <Association Name="Employee_ReportsToEmployee">
+        <End Role="Employee" Type="IQTWcf.Employee" Multiplicity="*" />
+        <End Role="ReportsToEmployee" Type="IQTWcf.Employee" Multiplicity="0..1" />
+      </Association>
+      <Association Name="Employee_EmployeeTerritories">
+        <End Role="Employee" Type="IQTWcf.Employee" Multiplicity="*" />
+        <End Role="EmployeeTerritories" Type="IQTWcf.EmployeeTerritory" Multiplicity="*" />
+      </Association>
+      <Association Name="Employee_Orders">
+        <End Role="Employee" Type="IQTWcf.Employee" Multiplicity="*" />
+        <End Role="Orders" Type="IQTWcf.Order" Multiplicity="*" />
+      </Association>
+      <Association Name="Employee_ReportsToChildren">
+        <End Role="Employee" Type="IQTWcf.Employee" Multiplicity="*" />
+        <End Role="ReportsToChildren" Type="IQTWcf.Employee" Multiplicity="*" />
+      </Association>
+      <Association Name="EmployeeTerritory_Employee">
+        <End Role="EmployeeTerritory" Type="IQTWcf.EmployeeTerritory" Multiplicity="*" />
+        <End Role="Employee" Type="IQTWcf.Employee" Multiplicity="0..1" />
+      </Association>
+      <Association Name="EmployeeTerritory_Territory">
+        <End Role="EmployeeTerritory" Type="IQTWcf.EmployeeTerritory" Multiplicity="*" />
+        <End Role="Territory" Type="IQTWcf.Territory" Multiplicity="0..1" />
+      </Association>
+      <Association Name="OrderDetail_Order">
+        <End Role="OrderDetail" Type="IQTWcf.OrderDetail" Multiplicity="*" />
+        <End Role="Order" Type="IQTWcf.Order" Multiplicity="0..1" />
+      </Association>
+      <Association Name="OrderDetail_Product">
+        <End Role="OrderDetail" Type="IQTWcf.OrderDetail" Multiplicity="*" />
+        <End Role="Product" Type="IQTWcf.Product" Multiplicity="0..1" />
+      </Association>
+      <Association Name="Order_Customer">
+        <End Role="Order" Type="IQTWcf.Order" Multiplicity="*" />
+        <End Role="Customer" Type="IQTWcf.Customer" Multiplicity="0..1" />
+      </Association>
+      <Association Name="Order_Employee">
+        <End Role="Order" Type="IQTWcf.Order" Multiplicity="*" />
+        <End Role="Employee" Type="IQTWcf.Employee" Multiplicity="0..1" />
+      </Association>
+      <Association Name="Order_OrderDetails">
+        <End Role="Order" Type="IQTWcf.Order" Multiplicity="*" />
+        <End Role="OrderDetails" Type="IQTWcf.OrderDetail" Multiplicity="*" />
+      </Association>
+      <Association Name="Order_ShipViaShipper">
+        <End Role="Order" Type="IQTWcf.Order" Multiplicity="*" />
+        <End Role="ShipViaShipper" Type="IQTWcf.Shipper" Multiplicity="0..1" />
+      </Association>
+      <Association Name="Product_Category">
+        <End Role="Product" Type="IQTWcf.Product" Multiplicity="*" />
+        <End Role="Category" Type="IQTWcf.Category" Multiplicity="0..1" />
+      </Association>
+      <Association Name="Product_Supplier">
+        <End Role="Product" Type="IQTWcf.Product" Multiplicity="*" />
+        <End Role="Supplier" Type="IQTWcf.Supplier" Multiplicity="0..1" />
+      </Association>
+      <Association Name="Product_OrderDetails">
+        <End Role="Product" Type="IQTWcf.Product" Multiplicity="*" />
+        <End Role="OrderDetails" Type="IQTWcf.OrderDetail" Multiplicity="*" />
+      </Association>
+      <Association Name="Region_Territories">
+        <End Role="Region" Type="IQTWcf.Region" Multiplicity="*" />
+        <End Role="Territories" Type="IQTWcf.Territory" Multiplicity="*" />
+      </Association>
+      <Association Name="Shipper_ShipViaOrders">
+        <End Role="Shipper" Type="IQTWcf.Shipper" Multiplicity="*" />
+        <End Role="ShipViaOrders" Type="IQTWcf.Order" Multiplicity="*" />
+      </Association>
+      <Association Name="Supplier_Products">
+        <End Role="Supplier" Type="IQTWcf.Supplier" Multiplicity="*" />
+        <End Role="Products" Type="IQTWcf.Product" Multiplicity="*" />
+      </Association>
+      <Association Name="Territory_Region">
+        <End Role="Territory" Type="IQTWcf.Territory" Multiplicity="*" />
+        <End Role="Region" Type="IQTWcf.Region" Multiplicity="0..1" />
+      </Association>
+      <Association Name="Territory_EmployeeTerritories">
+        <End Role="Territory" Type="IQTWcf.Territory" Multiplicity="*" />
+        <End Role="EmployeeTerritories" Type="IQTWcf.EmployeeTerritory" Multiplicity="*" />
+      </Association>
+      <EntityContainer Name="OracleService" m:IsDefaultEntityContainer="true">
+        <EntitySet Name="Categories" EntityType="IQTWcf.Category" />
+        <EntitySet Name="CustomerCustomerDemos" EntityType="IQTWcf.CustomerCustomerDemo" />
+        <EntitySet Name="CustomerDemographics" EntityType="IQTWcf.CustomerDemographic" />
+        <EntitySet Name="Customers" EntityType="IQTWcf.Customer" />
+        <EntitySet Name="Employees" EntityType="IQTWcf.Employee" />
+        <EntitySet Name="EmployeeTerritories" EntityType="IQTWcf.EmployeeTerritory" />
+        <EntitySet Name="OrderDetails" EntityType="IQTWcf.OrderDetail" />
+        <EntitySet Name="Orders" EntityType="IQTWcf.Order" />
+        <EntitySet Name="Products" EntityType="IQTWcf.Product" />
+        <EntitySet Name="Regions" EntityType="IQTWcf.Region" />
+        <EntitySet Name="Shippers" EntityType="IQTWcf.Shipper" />
+        <EntitySet Name="Suppliers" EntityType="IQTWcf.Supplier" />
+        <EntitySet Name="Territories" EntityType="IQTWcf.Territory" />
+        <AssociationSet Name="Category_Products" Association="IQTWcf.Category_Products">
+          <End Role="Category" EntitySet="Categories" />
+          <End Role="Products" EntitySet="Products" />
+        </AssociationSet>
+        <AssociationSet Name="CustomerCustomerDemo_Customer" Association="IQTWcf.CustomerCustomerDemo_Customer">
+          <End Role="CustomerCustomerDemo" EntitySet="CustomerCustomerDemos" />
+          <End Role="Customer" EntitySet="Customers" />
+        </AssociationSet>
+        <AssociationSet Name="CustomerCustomerDemo_CustomerDemographics" Association="IQTWcf.CustomerCustomerDemo_CustomerDemographics">
+          <End Role="CustomerCustomerDemo" EntitySet="CustomerCustomerDemos" />
+          <End Role="CustomerDemographics" EntitySet="CustomerDemographics" />
+        </AssociationSet>
+        <AssociationSet Name="CustomerDemographic_CustomerCustomerDemos" Association="IQTWcf.CustomerDemographic_CustomerCustomerDemos">
+          <End Role="CustomerDemographic" EntitySet="CustomerDemographics" />
+          <End Role="CustomerCustomerDemos" EntitySet="CustomerCustomerDemos" />
+        </AssociationSet>
+        <AssociationSet Name="Customer_CustomerCustomerDemos" Association="IQTWcf.Customer_CustomerCustomerDemos">
+          <End Role="Customer" EntitySet="Customers" />
+          <End Role="CustomerCustomerDemos" EntitySet="CustomerCustomerDemos" />
+        </AssociationSet>
+        <AssociationSet Name="Customer_Orders" Association="IQTWcf.Customer_Orders">
+          <End Role="Customer" EntitySet="Customers" />
+          <End Role="Orders" EntitySet="Orders" />
+        </AssociationSet>
+        <AssociationSet Name="Employee_ReportsToEmployee" Association="IQTWcf.Employee_ReportsToEmployee">
+          <End Role="Employee" EntitySet="Employees" />
+          <End Role="ReportsToEmployee" EntitySet="Employees" />
+        </AssociationSet>
+        <AssociationSet Name="Employee_EmployeeTerritories" Association="IQTWcf.Employee_EmployeeTerritories">
+          <End Role="Employee" EntitySet="Employees" />
+          <End Role="EmployeeTerritories" EntitySet="EmployeeTerritories" />
+        </AssociationSet>
+        <AssociationSet Name="Employee_Orders" Association="IQTWcf.Employee_Orders">
+          <End Role="Employee" EntitySet="Employees" />
+          <End Role="Orders" EntitySet="Orders" />
+        </AssociationSet>
+        <AssociationSet Name="Employee_ReportsToChildren" Association="IQTWcf.Employee_ReportsToChildren">
+          <End Role="Employee" EntitySet="Employees" />
+          <End Role="ReportsToChildren" EntitySet="Employees" />
+        </AssociationSet>
+        <AssociationSet Name="EmployeeTerritory_Employee" Association="IQTWcf.EmployeeTerritory_Employee">
+          <End Role="EmployeeTerritory" EntitySet="EmployeeTerritories" />
+          <End Role="Employee" EntitySet="Employees" />
+        </AssociationSet>
+        <AssociationSet Name="EmployeeTerritory_Territory" Association="IQTWcf.EmployeeTerritory_Territory">
+          <End Role="EmployeeTerritory" EntitySet="EmployeeTerritories" />
+          <End Role="Territory" EntitySet="Territories" />
+        </AssociationSet>
+        <AssociationSet Name="OrderDetail_Order" Association="IQTWcf.OrderDetail_Order">
+          <End Role="OrderDetail" EntitySet="OrderDetails" />
+          <End Role="Order" EntitySet="Orders" />
+        </AssociationSet>
+        <AssociationSet Name="OrderDetail_Product" Association="IQTWcf.OrderDetail_Product">
+          <End Role="OrderDetail" EntitySet="OrderDetails" />
+          <End Role="Product" EntitySet="Products" />
+        </AssociationSet>
+        <AssociationSet Name="Order_Customer" Association="IQTWcf.Order_Customer">
+          <End Role="Order" EntitySet="Orders" />
+          <End Role="Customer" EntitySet="Customers" />
+        </AssociationSet>
+        <AssociationSet Name="Order_Employee" Association="IQTWcf.Order_Employee">
+          <End Role="Order" EntitySet="Orders" />
+          <End Role="Employee" EntitySet="Employees" />
+        </AssociationSet>
+        <AssociationSet Name="Order_OrderDetails" Association="IQTWcf.Order_OrderDetails">
+          <End Role="Order" EntitySet="Orders" />
+          <End Role="OrderDetails" EntitySet="OrderDetails" />
+        </AssociationSet>
+        <AssociationSet Name="Order_ShipViaShipper" Association="IQTWcf.Order_ShipViaShipper">
+          <End Role="Order" EntitySet="Orders" />
+          <End Role="ShipViaShipper" EntitySet="Shippers" />
+        </AssociationSet>
+        <AssociationSet Name="Product_Category" Association="IQTWcf.Product_Category">
+          <End Role="Product" EntitySet="Products" />
+          <End Role="Category" EntitySet="Categories" />
+        </AssociationSet>
+        <AssociationSet Name="Product_Supplier" Association="IQTWcf.Product_Supplier">
+          <End Role="Product" EntitySet="Products" />
+          <End Role="Supplier" EntitySet="Suppliers" />
+        </AssociationSet>
+        <AssociationSet Name="Product_OrderDetails" Association="IQTWcf.Product_OrderDetails">
+          <End Role="Product" EntitySet="Products" />
+          <End Role="OrderDetails" EntitySet="OrderDetails" />
+        </AssociationSet>
+        <AssociationSet Name="Region_Territories" Association="IQTWcf.Region_Territories">
+          <End Role="Region" EntitySet="Regions" />
+          <End Role="Territories" EntitySet="Territories" />
+        </AssociationSet>
+        <AssociationSet Name="Shipper_ShipViaOrders" Association="IQTWcf.Shipper_ShipViaOrders">
+          <End Role="Shipper" EntitySet="Shippers" />
+          <End Role="ShipViaOrders" EntitySet="Orders" />
+        </AssociationSet>
+        <AssociationSet Name="Supplier_Products" Association="IQTWcf.Supplier_Products">
+          <End Role="Supplier" EntitySet="Suppliers" />
+          <End Role="Products" EntitySet="Products" />
+        </AssociationSet>
+        <AssociationSet Name="Territory_Region" Association="IQTWcf.Territory_Region">
+          <End Role="Territory" EntitySet="Territories" />
+          <End Role="Region" EntitySet="Regions" />
+        </AssociationSet>
+        <AssociationSet Name="Territory_EmployeeTerritories" Association="IQTWcf.Territory_EmployeeTerritories">
+          <End Role="Territory" EntitySet="Territories" />
+          <End Role="EmployeeTerritories" EntitySet="EmployeeTerritories" />
+        </AssociationSet>
+      </EntityContainer>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

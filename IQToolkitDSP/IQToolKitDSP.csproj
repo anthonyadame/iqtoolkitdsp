@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{95BCB44A-3E0D-44EF-BE9E-ED2C6CE9830F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IQToolkitDSP</RootNamespace>
+    <AssemblyName>IQToolkitDSP</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="IQToolkit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Resources\IQToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="IQToolkit.Data, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Resources\IQToolkit.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Services" />
+    <Reference Include="System.Data.Services.Client" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DSPIQALinqQuery.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DSPIQUpdateProvider.cs" />
+    <Compile Include="DSPContext.cs" />
+    <Compile Include="DSPDataService.cs" />
+    <Compile Include="DSPMetadata.cs" />
+    <Compile Include="DSPResourceQueryProvider.cs" />
+    <Compile Include="ExpressionVisitor.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourcePropertyAnnotation.cs" />
+    <Compile Include="ResourceTypeAnnotation.cs" />
+    <Compile Include="WcfConvert\Annotations.cs" />
+    <Compile Include="WcfConvert\AOA\ExpressionConverter\ExpressionConversionResult.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WcfConvert\AOA\ExpressionConverter\ExpressionConverter.cs" />
+    <Compile Include="WcfConvert\AOA\ExpressionConverter\ExpressionResourceAnnotations.cs" />
+    <Compile Include="WcfConvert\AOA\ExpressionConverter\ExpressionSimplifier.cs" />
+    <Compile Include="WcfConvert\AOA\ExpressionConverter\FilterConverter.cs" />
+    <Compile Include="WcfConvert\AOA\ExpressionConverter\ResourceAnnotationPreservingExpressionVisitor.cs" />
+    <Compile Include="WcfConvert\AOA\ExpressionConverter\ResourceAnnotationVisitor.cs" />
+    <Compile Include="WcfConvert\ExpressionUtil.cs" />
+    <Compile Include="DSPIQALinqQueryProvider.cs" />
+    <Compile Include="WcfConvert\IQueryResultsProcessor.cs" />
+    <Compile Include="TypeSystem.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IQTContrib\IQTContrib.csproj">
+      <Project>{52BCBD2E-BC87-4738-B2E0-1F9B578AB7CB}</Project>
+      <Name>IQTContrib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

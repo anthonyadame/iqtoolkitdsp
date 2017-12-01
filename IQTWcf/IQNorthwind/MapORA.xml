@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<map>
+  <Entity Id="Category">
+    <Table Name="NORTHWIND.CATEGORIES"/>
+    <Column Member="CategoryID" IsPrimaryKey="true" IsGenerated="true" />
+    <Column Member="CategoryName" />
+    <Column Member="Description" />
+    <Column Member="Picture" />
+    <Association Member="Products" KeyMembers="CategoryID" RelatedEntityID="Product" RelatedKeyMembers="CategoryID" />
+  </Entity>
+  <Entity Id="CustomerCustomerDemo">
+    <Table Name="NORTHWIND.CUSTOMERCUSTOMERDEMO"/>
+    <Column Member="CustomerID" IsPrimaryKey="true" />
+    <Column Member="CustomerTypeID" IsPrimaryKey="true" />
+    <Association Member="Customer" KeyMembers="CustomerID" RelatedEntityID="Customer" RelatedKeyMembers="CustomerID" />
+    <Association Member="CustomerDemographics" KeyMembers="CustomerTypeID" RelatedEntityID="CustomerDemographic" RelatedKeyMembers="CustomerTypeID" />
+  </Entity>
+  <Entity Id="CustomerDemographic">
+    <Table Name="NORTHWIND.CUSTOMERDEMOGRAPHICS"/>
+    <Column Member="CustomerDesc" />
+    <Column Member="CustomerTypeID" IsPrimaryKey="true" />
+    <Association Member="CustomerCustomerDemos" KeyMembers="CustomerTypeID" RelatedEntityID="CustomerCustomerDemo" RelatedKeyMembers="CustomerTypeID" />
+  </Entity>
+  <Entity Id="Customer">
+    <Table Name="NORTHWIND.CUSTOMERS"/>
+    <Column Member="Address" />
+    <Column Member="City" />
+    <Column Member="CompanyName" DbType="NVARCHAR(40) NOT NULL" />
+    <Column Member="ContactName" />
+    <Column Member="ContactTitle" />
+    <Column Member="Country" />
+    <Column Member="CustomerID" IsPrimaryKey="true" />
+    <Column Member="Fax" />
+    <Column Member="Phone" />
+    <Column Member="PostalCode" />
+    <Column Member="Region" />
+    <Association Member="CustomerCustomerDemos" KeyMembers="CustomerID" RelatedEntityID="CustomerCustomerDemo" RelatedKeyMembers="CustomerID" />
+    <Association Member="Orders" KeyMembers="CustomerID" RelatedEntityID="Order" RelatedKeyMembers="CustomerID" />
+  </Entity>
+  <Entity Id="Employee">
+    <Table Name="NORTHWIND.EMPLOYEES"/>
+    <Column Member="Address" />
+    <Column Member="BirthDate" DbType="datetime NULL" />
+    <Column Member="City" />
+    <Column Member="Country" />
+    <Column Member="EmployeeID" IsPrimaryKey="true" IsGenerated="true" />
+    <Column Member="Extension" />
+    <Column Member="FirstName" />
+    <Column Member="HireDate" />
+    <Column Member="HomePhone" />
+    <Column Member="LastName" />
+    <Column Member="Notes" />
+    <Column Member="Photo" />
+    <Column Member="PhotoPath" />
+    <Column Member="PostalCode" />
+    <Column Member="Region" />
+    <Column Member="ReportsTo" />
+    <Column Member="Title" />
+    <Column Member="TitleOfCourtesy" />
+    <Association Member="ReportsToEmployee" KeyMembers="EmployeeID" RelatedEntityID="Employee" RelatedKeyMembers="ReportsTo" />
+    <Association Member="EmployeeTerritories" KeyMembers="EmployeeID" RelatedEntityID="EmployeeTerritory" RelatedKeyMembers="EmployeeID" />
+    <Association Member="Orders" KeyMembers="EmployeeID" RelatedEntityID="Order" RelatedKeyMembers="EmployeeID" />
+    <Association Member="ReportsToChildren" KeyMembers="ReportsTo" RelatedEntityID="Employee" RelatedKeyMembers="EmployeeID" />
+  </Entity>
+  <Entity Id="EmployeeTerritory">
+    <Table Name="NORTHWIND.EMPLOYEETERRITORIES"/>
+    <Column Member="EmployeeID" IsPrimaryKey="true" />
+    <Column Member="TerritoryID" IsPrimaryKey="true" />
+    <Association Member="Employee" KeyMembers="EmployeeID" RelatedEntityID="Employee" RelatedKeyMembers="EmployeeID" />
+    <Association Member="Territory" KeyMembers="TerritoryID" RelatedEntityID="Territory" RelatedKeyMembers="TerritoryID" />
+  </Entity>
+  <Entity Id="OrderDetail">
+    <Table Name="NORTHWIND.ORDER DETAILS"/>
+    <Column Member="Discount" />
+    <Column Member="OrderID" IsPrimaryKey="true" />
+    <Column Member="ProductID" IsPrimaryKey="true" />
+    <Column Member="Quantity" />
+    <Column Member="UnitPrice" />
+    <Association Member="Order" KeyMembers="OrderID" RelatedEntityID="Order" RelatedKeyMembers="OrderID" />
+    <Association Member="Product" KeyMembers="ProductID" RelatedEntityID="Product" RelatedKeyMembers="ProductID" />
+  </Entity>
+  <Entity Id="Order">
+    <Table Name="NORTHWIND.ORDERS"/>
+    <Column Member="CustomerID" />
+    <Column Member="EmployeeID" />
+    <Column Member="Freight" />
+    <Column Member="OrderDate" />
+    <Column Member="OrderID" IsPrimaryKey="true" IsGenerated="true" />
+    <Column Member="RequiredDate" />
+    <Column Member="ShipAddress" />
+    <Column Member="ShipCity" />
+    <Column Member="ShipCountry" />
+    <Column Member="ShipName" />
+    <Column Member="ShippedDate" />
+    <Column Member="ShipPostalCode" />
+    <Column Member="ShipRegion" />
+    <Column Member="ShipVia" />
+    <Association Member="Customer" KeyMembers="CustomerID" RelatedEntityID="Customer" RelatedKeyMembers="CustomerID" />
+    <Association Member="Employee" KeyMembers="EmployeeID" RelatedEntityID="Employee" RelatedKeyMembers="EmployeeID" />
+    <Association Member="OrderDetails" KeyMembers="OrderID" RelatedEntityID="OrderDetail" RelatedKeyMembers="OrderID" />
+    <Association Member="ShipViaShipper" KeyMembers="ShipVia" RelatedEntityID="Shipper" RelatedKeyMembers="ShipperID" />
+  </Entity>
+  <Entity Id="Product">
+    <Table Name="NORTHWIND.PRODUCTS"/>
+    <Column Member="CategoryID" />
+    <Column Member="Discontinued" />
+    <Column Member="ProductID" IsPrimaryKey="true" IsGenerated="true" />
+    <Column Member="ProductName" />
+    <Column Member="QuantityPerUnit" />
+    <Column Member="ReorderLevel" />
+    <Column Member="SupplierID" />
+    <Column Member="UnitPrice" />
+    <Column Member="UnitsInStock" />
+    <Column Member="UnitsOnOrder" />
+    <Association Member="Category" KeyMembers="CategoryID" RelatedEntityID="Category" RelatedKeyMembers="CategoryID" />
+    <Association Member="OrderDetails" KeyMembers="ProductID" RelatedEntityID="OrderDetail" RelatedKeyMembers="ProductID" />
+    <Association Member="Supplier" KeyMembers="SupplierID" RelatedEntityID="Supplier" RelatedKeyMembers="SupplierID" />
+  </Entity>
+  <Entity Id="Region">
+    <Table Name="NORTHWIND.REGION"/>
+    <Column Member="RegionDescription" />
+    <Column Member="RegionID" IsPrimaryKey="true" />
+    <Association Member="Territories" KeyMembers="RegionID" RelatedEntityID="Territory" RelatedKeyMembers="RegionID" />
+  </Entity>
+  <Entity Id="Shipper">
+    <Table Name="NORTHWIND.SHIPPERS"/>
+    <Column Member="CompanyName" />
+    <Column Member="Phone" />
+    <Column Member="ShipperID" IsPrimaryKey="true" IsGenerated="true" />
+    <Association Member="ShipViaOrders" KeyMembers="ShipperID" RelatedEntityID="Order" RelatedKeyMembers="ShipVia" />
+  </Entity>
+  <Entity Id="Supplier">
+    <Table Name="NORTHWIND.SUPPLIERS"/>
+    <Column Member="Address" />
+    <Column Member="City" />
+    <Column Member="CompanyName" />
+    <Column Member="ContactName" />
+    <Column Member="ContactTitle" />
+    <Column Member="Country" />
+    <Column Member="Fax" />
+    <Column Member="HomePage" />
+    <Column Member="Phone" />
+    <Column Member="PostalCode" />
+    <Column Member="Region" />
+    <Column Member="SupplierID" IsPrimaryKey="true" IsGenerated="true" />
+    <Association Member="Products" KeyMembers="SupplierID" RelatedEntityID="Product" RelatedKeyMembers="SupplierID" />
+  </Entity>
+  <Entity Id="Territory">
+    <Table Name="NORTHWIND.TERRITORIES"/>
+    <Column Member="RegionID" />
+    <Column Member="TerritoryDescription" />
+    <Column Member="TerritoryID" IsPrimaryKey="true" />
+    <Association Member="Region" KeyMembers="RegionID" RelatedEntityID="Region" RelatedKeyMembers="RegionID" />
+    <Association Member="EmployeeTerritories" KeyMembers="TerritoryID" RelatedEntityID="EmployeeTerritory" RelatedKeyMembers="TerritoryID" />
+  </Entity>
+</map>
